@@ -6,13 +6,13 @@ echo
 echo --------------------------------------------
 
 #安装docker函数
-install_docker(){
+install_docker{
 	docker version > /dev/null || curl -fsSL get.docker.com | bash
 }
 
 #面板对接ssr
 
-get_SSR_url(){
+get_SSR_url{
 	read -p "请输入面板地址："  URL
 	echo -----------------------------
 	echo "面板地址为"$URL
