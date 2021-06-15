@@ -96,6 +96,7 @@ get_v2ray_url(){
 	--log-opt max-size=10m --log-opt max-file=5 \
 	--restart=always \
 	origined/v2ray:0.1
+}
 #运行一次后台检测docker已安装？自动安装;跳过。
 docker_check
 if [ $? -eq 1 ]; then
