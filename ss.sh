@@ -89,7 +89,7 @@ get_v2ray_url(){
 	echo -----------------------------
 	echo
 	read -p "回车确定对接.....ctrl+c取消......"
-	name="SSR_NOED$port"
+	name="V2-$port"
 	docker run -d --name=$name \
 	-e speedtest=0 -e api_port=2333 -e downWithPanel=0 \
 	-e node_id=$ID -e sspanel_url="$URL" -e key="$KEY" -e TZ="Asia/Shanghai"  -p $port:$port/tcp -p $port:$port/udp \
