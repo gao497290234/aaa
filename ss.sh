@@ -11,32 +11,6 @@ red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
-#对接SSR函数
-get_SSR_url(){
-	read -p "请输入面板地址："  URL
-	echo -----------------------------
-	echo "面板地址为"$URL
-	echo -----------------------------
-	echo
-	read -p "请输入节点ID："  ID
-	echo -----------------------------
-	echo "节点ID为"$ID
-	echo -----------------------------
-	echo
-	read -p "请输入面板密钥："  KEY
-	echo -----------------------------
-	echo "面板密钥为"$KEY
-	echo -----------------------------
-	echo
-	read -p "请输入监听端口："  port
-	echo -----------------------------
-	echo "监听端口为"$port
-	echo -----------------------------
-	echo
-	read -p "回车确定对接....."
-	name="SSR_NOED$port"
-	docker run -d --name=$name -e NODE_ID=$ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=$URL -e SPEEDTEST=0 -e WEBAPI_TOKEN=$KEY --log-opt max-size=1000m --log-opt max-file=3 -p $port:$port/tcp -p $port:$port/udp --restart=always origined/ssr:latest
-}
 
 #检测docker函数
 function docker_check(){
@@ -92,7 +66,36 @@ get_SSR_url(){
 	name="SSR-$port"
 	docker run -d --name=$name -e NODE_ID=$ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=$URL -e SPEEDTEST=0 -e WEBAPI_TOKEN=$KEY --log-opt max-size=1000m --log-opt max-file=3 -p $port:$port/tcp -p $port:$port/udp --restart=always origined/ssr:latest
 }
-
+get_v2ray_url(){
+	echo ----------------------------------------------------------------------------------
+	read -p "请输入面板地址："  URL
+	echo -----------------------------
+	echo "面板地址为"$URL
+	echo -----------------------------
+	echo
+	read -p "请输入节点ID："  ID
+	echo -----------------------------
+	echo "节点ID为"$ID
+	echo -----------------------------
+	echo
+	read -p "请输入面板密钥："  KEY
+	echo -----------------------------
+	echo "面板密钥为"$KEY
+	echo -----------------------------
+	echo
+	read -p "请输入监听端口："  port
+	echo -----------------------------
+	echo "监听端口为"$port
+	echo -----------------------------
+	echo
+	read -p "回车确定对接.....ctrl+c取消......"
+	name="SSR_NOED$port"
+	docker run -d --name=$name \
+	-e speedtest=0 -e api_port=2333 -e downWithPanel=0 \
+	-e node_id=$ID -e sspanel_url="$URL" -e key="$KEY" -e TZ="Asia/Shanghai"  -p $port:$port/tcp -p $port:$port/udp \
+	--log-opt max-size=10m --log-opt max-file=5 \
+	--restart=always \
+	origined/v2ray:0.1
 #运行一次后台检测docker已安装？自动安装;跳过。
 docker_check
 if [ $? -eq 1 ]; then
@@ -112,7 +115,7 @@ read -p "输入你想做的选项(默认选择1 ${options[0]}):" selected
 case "${selected}" in
     1) get_SSR_url
     ;;
-    2) fc1
+    2) get_v2ray_url
     ;;
     3) echo "执行函数3"
     ;;
