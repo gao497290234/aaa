@@ -64,6 +64,7 @@ get_SSR_url(){
 	echo
 	read -p "回车确定对接....."
 	name="SSR-$port"
+        echo "$name" >> ssr_port.conf
 	docker run -d --name=$name -e NODE_ID=$ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=$URL -e SPEEDTEST=0 -e WEBAPI_TOKEN=$KEY --log-opt max-size=1000m --log-opt max-file=3 -p $port:$port/tcp -p $port:$port/udp --restart=always origined/ssr:latest
 }
 get_v2ray_url(){
@@ -97,6 +98,35 @@ get_v2ray_url(){
 	--restart=always \
 	origined/v2ray:0.1
 }
+#删除ssr
+function rm_ssr(){
+	li=$(wc -l < ssr_port.conf)
+	echo $li
+#for ((i=1;i<=$li;i++ )); do
+#    hint="${options[$i-1]}"
+#    echo -e "${green}${i}${plain}) ${hint}"
+#	echo count
+	for line in `cat ssr_port.conf`
+	do
+    		i=$(($ee+1))
+    		hint[ee]=${line}
+    		echo -e "${green}${ee}${plain}) ${hint[ee]}"
+	done
+	read -p "输入你要删除的选项:" selected
+	for((a=1;a<=$li;a++)); do
+		if [ $a -eq $selected ]; then
+     		sed -i "${a}d" ssr_port.conf
+     		docker stop ${hint[a]}
+     		docker rm -f ${hint[a]}
+			tj=0
+		else
+			tj=1
+		fi
+	done
+	if [ $tj -ne 0 ]; then
+		echo "请输入要删除的选项而非端口"
+	fi
+}
 #运行一次后台检测docker已安装？自动安装;跳过。
 docker_check
 if [ $? -eq 1 ]; then
@@ -118,7 +148,7 @@ case "${selected}" in
     ;;
     2) get_v2ray_url
     ;;
-    3) echo "执行函数3"
+    3) rm_ssr
     ;;
     4) echo "执行函数4"
     ;;
@@ -129,6 +159,3 @@ case "${selected}" in
     ;;
 esac
 done
-
-
-	
