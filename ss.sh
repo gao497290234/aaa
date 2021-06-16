@@ -100,17 +100,15 @@ get_v2ray_url(){
 }
 #删除ssr
 function rm_ssr(){
-	li=$(wc -l < ssr_port.conf)
-	echo $li
 #for ((i=1;i<=$li;i++ )); do
 #    hint="${options[$i-1]}"
 #    echo -e "${green}${i}${plain}) ${hint}"
 #	echo count
 	for line in `cat ssr_port.conf`
 	do
-    		i=$(($ee+1))
-    		hint[ee]=${line}
-    		echo -e "${green}${ee}${plain}) ${hint[ee]}"
+    	x=$(($x+1))
+    	hint[x]=${line}
+    	echo -e "${green}${x}${plain}) ${hint[x]}"
 	done
 	read -p "输入你要删除的选项:" selected
 	for((a=1;a<=$li;a++)); do
@@ -119,12 +117,13 @@ function rm_ssr(){
      		docker stop ${hint[a]}
      		docker rm -f ${hint[a]}
 			tj=0
+			break
 		else
 			tj=1
 		fi
 	done
-	if [ $tj -ne 0 ]; then
-		echo "请输入要删除的选项而非端口"
+	if [ $tj==1 ]; then
+		echo "请输入要删除的端口选项而非端口"
 	fi
 }
 #运行一次后台检测docker已安装？自动安装;跳过。
