@@ -70,7 +70,7 @@ function docking(){
   echo
   read -p "请输入节点类型(Shadowsocks,V2ray,Trojan)："  $nodetype
 	echo -----------------------------
-	echo "面板地址为:"$nodetype
+	echo "节点类型为:"$nodetype
 	echo -----------------------------
 	echo
 	read -p "请输入面板地址："  URL
@@ -85,7 +85,7 @@ function docking(){
 	echo
 	read -p "请输入对接端口："  port
 	echo -----------------------------
-	echo "面板类型为:"$port
+	echo "对接端口为:"$port
   echo------------------------------
   echo
 	read -p "请输入面板密钥："  KEY
