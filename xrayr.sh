@@ -68,7 +68,7 @@ function docking(){
 	echo "面板类型为:"$type
         echo -----------------------------
         echo
-        read -p "请输入节点类型(Shadowsocks,V2ray,Trojan)："  $nodetype
+        read -p "请输入节点类型(Shadowsocks,V2ray,Trojan)："  nodetype
 	echo -----------------------------
 	echo "节点类型为:"$nodetype
 	echo -----------------------------
