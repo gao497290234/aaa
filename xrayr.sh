@@ -1,10 +1,10 @@
 
 # !/bin/bash
-echo --------------------------------------------------------------------------------------------------
-echo 
+echo ====================================================================================================
+echo
 echo                                       马花藤定制定制脚本      
 echo 
-echo --------------------------------------------------------------------------------------------------
+echo ====================================================================================================
 # check root
 [[ $EUID -ne 0 ]] && echo -e "${red}错误：${plain} 必须使用root用户运行此脚本！\n" && exit 1
 
@@ -66,9 +66,9 @@ function docking(){
 	read -p "请输入面板类型(SSpanel,V2board注意大小写)："  type
 	echo -----------------------------
 	echo "面板类型为:"$type
-  echo -----------------------------
-  echo
-  read -p "请输入节点类型(Shadowsocks,V2ray,Trojan)："  $nodetype
+        echo -----------------------------
+        echo
+        read -p "请输入节点类型(Shadowsocks,V2ray,Trojan)："  $nodetype
 	echo -----------------------------
 	echo "节点类型为:"$nodetype
 	echo -----------------------------
@@ -86,8 +86,8 @@ function docking(){
 	read -p "请输入对接端口："  port
 	echo -----------------------------
 	echo "对接端口为:"$port
-  echo------------------------------
-  echo
+        echo------------------------------
+        echo
 	read -p "请输入面板密钥："  KEY
 	echo -----------------------------
 	echo "面板密钥为:"$KEY
@@ -96,14 +96,14 @@ function docking(){
 	echo
 	read -p "回车确定对接....."
 	name="$type-$nodetype-$port"
-    echo "$name" >> ssr_port.conf
-	docker run -d --name=$name -e PANELTYPE=$type -e NODETYPE=$nodetype -e NODEID=$ID -e WEBURL=$URL -e KEY=$KEY -p $port:$port/tcp -p $port:$port/udp --restart=always origined/xrayr:1.0
+        echo "$name" >> docking_port.conf
+	docker run -d --name=$name -e PANELTYPE=$type -e NODETYPE=$nodetype -e NODEID=$ID -e WEBURL=$URL -e KEY=$KEY -e TLS=none -p $port:$port/tcp -p $port:$port/udp --restart=always origined/xrayr:1.0
   }
 
 
 
 function delete(){
-li=$(wc -l < ssr_port.conf)
+li=$(wc -l < docking_port.conf)
 check=0
 if [[ "$li" -eq "$check" ]]; then
     echo
@@ -111,7 +111,7 @@ if [[ "$li" -eq "$check" ]]; then
 	echo -e "${green} 节点为空 ${plain}"
 	echo -------------------------------------------------------------------------------------------------------
 else
-	for line in `cat ssr_port.conf`
+	for line in `cat docking_port.conf`
 	do
     		x=$(($x+1))
     		hint[x]=${line}
@@ -124,7 +124,7 @@ else
 	echo -------------------------------------------------------------------------------------------------------
 	for((a=1;a<=$li;a++)); do
 		if [ $a -eq $selected ]; then
-     		sed -i "${a}d" ssr_port.conf
+     		sed -i "${a}d" docking_port.conf
      		docker stop ${hint[a]}
      		docker rm -f ${hint[a]}
      		echo -e "${green} 选择的节点已删除 ${plain}"
