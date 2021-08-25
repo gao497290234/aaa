@@ -161,7 +161,7 @@ case "${selected}" in
     ;;
     2) delete
     ;;
-    3) exit
+    3) break
     ;;
     *)
     echo -e "[${red}Error${plain}] 请输入[1-3]的数值"
