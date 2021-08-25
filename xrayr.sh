@@ -97,7 +97,7 @@ function docking(){
 	read -p "回车确定对接....."
 	name="$type-$nodetype-$port"
     echo "$name" >> ssr_port.conf
-	docker run -d --name=$name -e PANELTYPE=$type -e NODETYPE=$nodetype -e NODEID=$ID -e WEBURL=$URL -e KEY=$KEY --log-opt max-size=1000m --log-opt max-file=3 -p $port:$port/tcp -p $port:$port/udp --restart=always origined/xrayr:1.0
+	docker run -d --name=$name -e PANELTYPE=$type -e NODETYPE=$nodetype -e NODEID=$ID -e WEBURL=$URL -e KEY=$KEY -p $port:$port/tcp -p $port:$port/udp --restart=always origined/xrayr:1.0
   }
 
 
