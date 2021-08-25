@@ -27,7 +27,7 @@ elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
 else
     echo -e "${red}未检测到系统版本，请联系脚本作者！${plain}\n" && exit 1
 fi
-options=(对接节点，删除节点 退出脚本)
+options=(对接节点 删除节点 退出脚本)
 
 red='\033[0;31m'
 green='\033[0;32m'
