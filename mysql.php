@@ -11,7 +11,7 @@ if($con2){
 }else{
 	echo 0;
 }
-$con1_sql="SELECT email,uuid,money,t,u,d,passwd,transfer_enable,ga_token,class,reg_time,class_expire FROM user WHERE money>0||class>0";
+$con1_sql="SELECT email,uuid,money,t,u,d,passwd,transfer_enable,ga_token,class,reg_date,class_expire FROM user WHERE money>0||class>0";
 $con2_sql="insert into v2_user(id,email,uuid,balance,t,u,d,password,transfer_enable,token,group_id,created_at,expired_at,updated_at) VALUES ($x,'$email','$uuid','$money','$t','$u','$d','$passwd',$transfer_enable,'$ga_token',$class,$reg_time,$class_expire,$z)";
 $con1_query=mysqli_query($con1,$con1_sql);
 if($con1_query){
@@ -30,7 +30,7 @@ while($v=$con1_arr=mysqli_fetch_array($con1_query)){
 	$transfer_enable=$v['transfer_enable'];
 	$ga_token=$v['ga_token'];
 	$class=$v['class'];
-	$reg_time=strtotime("$v['reg_time']");
+	$reg_time=strtotime("$v['reg_date']");
 	$class_expire=strtotime("$v['class_expire']");
 	mysqli_query($con2,$con2_sql);
 	$x++;
