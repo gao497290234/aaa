@@ -26,7 +26,7 @@ while($v=$con1_arr=mysqli_fetch_array($con1_query)){
 	$t=$v['t'];
 	$u=$v['u'];
 	$d=$v['d'];
-	$passwd=$['passwd'];
+	$passwd=$v['passwd'];
 	$transfer_enable=$v['transfer_enable'];
 	$ga_token=$v['ga_token'];
 	$class=$v['class'];
