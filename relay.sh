@@ -68,7 +68,7 @@ function docking(){
 	echo "端口初始值为:"$startp
         echo -----------------------------
         echo
-        read -p "请输入对接端口结束值："endp
+        read -p "请输入对接端口结束值：" endp
 	echo -----------------------------
 	echo "节点类型为:"$endp
 	echo -----------------------------
