@@ -44,7 +44,7 @@ function docker_check(){
 }
 
 function docker_install(){
-	echo -e "${yellow}检测运行环境未部署！${plain}
+	echo -e "${yellow}检测运行环境未部署！${plain}"
 	echo -e "${green}正在部署运行环境...${plain}"
         #curl -fsSL https://get.docker.com -o get-docker.sh
         #sh get-docker.sh
