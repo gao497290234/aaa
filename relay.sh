@@ -68,7 +68,7 @@ function docking(){
 	echo "端口初始值为:"$start-port
     echo -----------------------------
     echo
-    read -p "请输入对接端口结束值："  end-port
+    read -p "请输入对接端口结束值：" end-port
 	echo -----------------------------
 	echo "节点类型为:"$end-port
 	echo -----------------------------
@@ -76,8 +76,8 @@ function docking(){
 	echo ===============================================================================================
 	echo
 	read -p "回车确定创建....."
-    for(a=$star-port;a<=$end-port;a++);do
-		name="$a"
+    for((a=$star-port;a<=$end-port;a++));do
+		name=$a
         echo "$a" >> relay_port.conf
 		docker run -d --name $a -e Lport=$a -e Rport=$a -e Rhost=user$a/10000-$a%1000.h2yun.xyz --network host --restart=always origined/ehco:1.0
   }
