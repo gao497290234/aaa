@@ -44,39 +44,39 @@ function docker_check(){
 }
 
 function docker_install(){
-	   echo -e "${yellow}检测运行环境未部署！${plain}"
-     echo -e "${green}正在部署运行环境...${plain}"
-     #curl -fsSL https://get.docker.com -o get-docker.sh
-     #sh get-docker.sh
-     if [[ x"${release}" == x"centos" ]]; then
-         yum upadte -y
-         yum install docker -y
-     else
-         apt update -y
-         apt install docker.io -y
-     fi
-     systemctl restart docker
-     echo -e "${green}环境部署完成${plain}"
-     echo 
-     echo ------------------------------------------------------------------------------------------------
+	echo -e "${yellow}检测运行环境未部署！${plain}
+	echo -e "${green}正在部署运行环境...${plain}"
+        #curl -fsSL https://get.docker.com -o get-docker.sh
+        #sh get-docker.sh
+        if [[ x"${release}" == x"centos" ]]; then
+        	yum upadte -y
+         	yum install docker -y
+        else
+         	apt update -y
+         	apt install docker.io -y
+        fi
+        systemctl restart docker
+        echo -e "${green}环境部署完成${plain}"
+        echo 
+        echo ------------------------------------------------------------------------------------------------
 }
 
 function docking(){
 	echo ============================================================================================
-	read -p "请输入对接端口初始值：" start-port
+	read -p "请输入对接端口初始值：" startp
 	echo -----------------------------
-	echo "端口初始值为:"$start-port
-    echo -----------------------------
-    echo
-    read -p "请输入对接端口结束值：" end-port
+	echo "端口初始值为:"$startp
+        echo -----------------------------
+        echo
+        read -p "请输入对接端口结束值："endp
 	echo -----------------------------
-	echo "节点类型为:"$end-port
+	echo "节点类型为:"$endp
 	echo -----------------------------
 	echo
 	echo ===============================================================================================
 	echo
 	read -p "回车确定创建....."
-    for((a=$star-port;a<=$end-port;a++));do
+    for((a=$starp;a<=$endp;a++));do
 		name=$a
         echo "$a" >> relay_port.conf
 		docker run -d --name $a -e Lport=$a -e Rport=$a -e Rhost=user$a/10000-$a%1000.h2yun.xyz --network host --restart=always origined/ehco:1.0
