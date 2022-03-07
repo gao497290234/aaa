@@ -76,11 +76,17 @@ function docking(){
 	echo ===============================================================================================
 	echo
 	read -p "回车确定创建....."
-    for((a=$starp;a<=$endp;a++));do
-		name=$a
-        echo "$a" >> relay_port.conf
-		docker run -d --name $a -e Lport=$a -e Rport=$a -e Rhost=user$a/10000-$a%1000.h2yun.xyz --network host --restart=always origined/ehco:1.0
-  }
+	for((a=$startp;a<=$endp;a++))do
+	name=$a
+	echo "$a" >> relay_port.conf
+        docker run -d --name $a -e Lport=$a -e Rport=$a -e Rhost=user$[a/10000]-$[a%1000].h2yun.xyz --network host --restart=always origined/ehco:1.0
+done
+
+    #for((a=$starp;a<=$endp;a++));do
+	#	name=$a
+     #   echo "$a" >> relay_port.conf
+	#	docker run -d --name $a -e Lport=$a -e Rport=$a -e Rhost=user$a/10000-$a%1000.h2yun.xyz --network host --restart=always origined/ehco:1.0
+}
 
 
 
