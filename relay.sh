@@ -26,7 +26,8 @@ elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
 else
     echo -e "${red}未检测到系统版本，请联系脚本作者！${plain}\n" && exit 1
 fi
-options=(增加转发 删除转发 退出脚本)
+
+options=(添加 删除 退出)
 
 red='\033[0;31m'
 green='\033[0;32m'
