@@ -2,9 +2,8 @@ az_localtion=(eastasia southeastasia centralus eastus eastus2 westus northcentra
 for((a=0;a<${#az_localtion[@]};a++))
 do
 	set +e
-        az group create -n ${az_localtion[$a]} -l ${az_localtion[$a]} > /root/log.txt 2>&1 &
+        az group create -n ${az_localtion[$a]} -l ${az_localtion[$a]}
 done
-echo "等待10s，正在创建群组"
 sleep 10s
 for((a=0;a<${#az_localtion[@]};a++))
 do
