@@ -2,7 +2,7 @@ az_localtion=(eastasia southeastasia centralus eastus eastus2 westus northcentra
 for((a=0;a<${#az_localtion[@]};a++))
 do
 		set +e
-    sleep 5s
-        az group create -n ${az_localtion[$a]} -l ${az_localtion[$a]} #> /root/log.txt 2>&1 &
+    sleep 1s
+        nohup az group create -n ${az_localtion[$a]} -l ${az_localtion[$a]} 
 done
 		
