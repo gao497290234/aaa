@@ -26,7 +26,7 @@ function connect_VM(){
 for((a=0;a<${#az_localtion[@]};a++))
 	do
     		echo 正在重启实列${az_localtion[$a]}
-		connect_VM ${az_localtion[$a]}
+		reboot_VM ${az_localtion[$a]}
 	done
 sleep 120s
 
