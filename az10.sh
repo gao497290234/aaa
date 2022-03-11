@@ -10,14 +10,14 @@ function create_VM_F(){
 	set +e
 	az vm create -g $1 -n a$1 --image UbuntuLTS --admin-username ubuntu --admin-password @GWHsix666666 --size Standard_F4s_v2 --accelerated-networking true > /root/log.txt 2>&1 &
 	az vm create -g $1 -n b$1 --image UbuntuLTS --admin-username ubuntu --admin-password @GWHsix666666 --size Standard_F4s_v2 --accelerated-networking true > /root/log.txt 2>&1 &
-	az vm create -g $1 -n c$1 --image UbuntuLTS --admin-username ubuntu --admin-password @GWHsix666666 --size Standard_F4s_v2 --accelerated-networking true > /root/log.txt 2>&1 &
+	az vm create -g $1 -n c$1 --image UbuntuLTS --admin-username ubuntu --admin-password @GWHsix666666 --size Standard_F2s_v2 --accelerated-networking true > /root/log.txt 2>&1 &
 	echo 已执行创建VM虚拟机$1
 }
 function create_VM_D(){
 	set +e
 	az vm create -g $1 -n a$1 --image UbuntuLTS --admin-username ubuntu --admin-password @GWHsix666666 --size Standard_D4ds_v4 --accelerated-networking true > /root/log.txt 2>&1 &
 	az vm create -g $1 -n b$1 --image UbuntuLTS --admin-username ubuntu --admin-password @GWHsix666666 --size Standard_D4ds_v4 --accelerated-networking true > /root/log.txt 2>&1 &
-	az vm create -g $1 -n c$1 --image UbuntuLTS --admin-username ubuntu --admin-password @GWHsix666666 --size Standard_D4ds_v4 --accelerated-networking true > /root/log.txt 2>&1 &
+	az vm create -g $1 -n c$1 --image UbuntuLTS --admin-username ubuntu --admin-password @GWHsix666666 --size Standard_D2ds_v4 --accelerated-networking true > /root/log.txt 2>&1 &
 	echo 已执行创建VM虚拟机$1
 }
 function connect_VM(){
