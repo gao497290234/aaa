@@ -79,7 +79,7 @@ function docking(){
 	for((a=$startp;a<=$endp;a++))do
 	name=$a
 	echo "$a" >> relay_port.conf
-	echo docker run -d --name $a -e Lport=$a -e Rport=$a -e Rhost=user$[a%10000]-$[a%1000].h2yun.xyz --network host --restart=always origined/ehco:1.0
+	echo docker run -d --name $a -e Lport=$a -e Rport=$a -e Rhost=user$[(a/1000)%10]-$[a%1000].h2yun.xyz --network host --restart=always origined/ehco:1.0
         docker run -d --name $a -e Lport=$a -e Rport=$a -e Rhost=user$[a/1000%10]-$[a%1000].h2yun.xyz --network host --restart=always origined/ehco:1.0
 done
 }
