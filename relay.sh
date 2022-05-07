@@ -79,9 +79,9 @@ function docking(){
 	for((a=$startp;a<=$endp;a++))do
 	name=$a
 	echo "$a" >> relay_port.conf
-        docker run -d --name tcp-$a -e Lport=$a -e Rport=$a -e Rhost=user$[a/1000%10]-$[a%1000].h2yun.xyz --network host --restart=always origined/ehco:1.0
+        docker run -d --name tcp-$a -e Lport=$a -e Rport=$a -e Rhost=user$[a/1000-10].h2yun.xyz --network host --restart=always origined/ehco:1.0
 	echo 已部署tcp转发tcp-$a
-	docker run -d --name udp-$a -e LPORT=$a -e RPORT=$a -e HOST=user$[a/1000%10]-$[a%1000].h2yun.xyz --network host --restart=always origined/gudp:1.0
+	docker run -d --name udp-$a -e LPORT=$a -e RPORT=$a -e HOST=user$[a/1000-10].h2yun.xyz --network host --restart=always origined/gudp:1.0
 	echo 已部署udp转发udp-$a
 done
 }
