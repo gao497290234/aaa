@@ -79,11 +79,11 @@ function docking(){
 	for((a=$startp;a<=$endp;a++))do
 	name=$a
 	echo "$a" >> relay_port.conf
-        docker run -d --name tcp-$a -e Lport=$a -e Rport=$a -e Rhost=user-$[a/1000-10].h2yun.xyz --network host --restart=always origined/ehco:1.0
-	echo -e "${green}已部署转发tcp-$a,转发地址为user-$[a/1000-10].h2yun.xyz.${plain}"
+        docker run -d --name tcp-$a -e Lport=$a -e Rport=$a -e Rhost=user$[a/1000-10]-$[a%100].h2yun.xyz --network host --restart=always origined/ehco:1.0
+	echo -e "${green}已部署转发tcp-$a,转发地址为user$[a/1000-10]-$[a%100].h2yun.xyz.${plain}"
 	#echo 已部署转发tcp-$a,转发地址为user-$[a/1000-10].h2yun.xyz.
-	docker run -d --name udp-$a -e LPORT=$a -e RPORT=$a -e HOST=user-$[a/1000-10].h2yun.xyz --network host --restart=always origined/gudp:1.0
-	echo -e "${green}已部署转发udp-$a,转发地址为user-$[a/1000-10].h2yun.xyz.${plain}"
+	docker run -d --name udp-$a -e LPORT=$a -e RPORT=$a -e HOST=user$[a/1000-10]-$[a%100].h2yun.xyz --network host --restart=always origined/gudp:1.0
+	echo -e "${green}已部署转发udp-$a,转发地址为user$[a/1000-10]-$[a%100].h2yun.xyz.${plain}"
 	#echo 已部署转发udp-$a,转发地址为user-$[a/1000-10].h2yun.xyz.
 done
 }
