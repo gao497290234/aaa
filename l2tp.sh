@@ -74,63 +74,62 @@ if ! printf %s "$PRIVATE_IP" | grep -Eq "$IP_REGEX"; then
   echo "Cannot find valid private IP. Aborting."
   exit 1
 fi
-
-# Create IPsec (Libreswan) config
-cat > /etc/ipsec.conf <<EOF
-version 2.0
-config setup
-  nat_traversal=yes
-  virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:!192.168.42.0/23
-  protostack=netkey
-  nhelpers=0
-  interfaces=%defaultroute
-  uniqueids=no
-conn shared
-  left=$PRIVATE_IP
-  leftid=$PUBLIC_IP
-  right=%any
-  forceencaps=yes
-  authby=secret
-  pfs=no
-  rekey=no
-  keyingtries=3
-  dpddelay=15
-  dpdtimeout=30
-  dpdaction=clear
-  ike=3des-sha1,3des-sha2,aes-sha1,aes-sha1;modp1024,aes-sha2,aes-sha2;modp1024,aes256-sha2_512
-  phase2alg=3des-sha1,3des-sha2,aes-sha1,aes-sha2,aes256-sha2_512
-  sha2-truncbug=yes
-conn l2tp-psk
-  auto=add
-  leftsubnet=$PRIVATE_IP/32
-  leftnexthop=%defaultroute
-  leftprotoport=17/1701
-  rightprotoport=17/%any
-  type=transport
-  auth=esp
-  also=shared
-conn xauth-psk
-  auto=add
-  leftsubnet=0.0.0.0/0
-  rightaddresspool=192.168.43.10-192.168.43.250
-  modecfgdns1=$VPN_DNS1
-  modecfgdns2=$VPN_DNS2
-  leftxauthserver=yes
-  rightxauthclient=yes
-  leftmodecfgserver=yes
-  rightmodecfgclient=yes
-  modecfgpull=yes
-  xauthby=file
-  ike-frag=yes
-  ikev2=never
-  cisco-unity=yes
-  also=shared
-EOF
+## Create IPsec (Libreswan) config
+#cat > /etc/ipsec.conf <<EOF
+#version 2.0
+#config setup
+#  nat_traversal=yes
+#  virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:!192.168.42.0/23
+#  protostack=netkey
+#  nhelpers=0
+#  interfaces=%defaultroute
+#  uniqueids=no
+#conn shared
+#  left=$PRIVATE_IP
+#  leftid=$PUBLIC_IP
+#  right=%any
+#  forceencaps=yes
+#  authby=secret
+#  pfs=no
+#  rekey=no
+#  keyingtries=3
+#  dpddelay=15
+#  dpdtimeout=30
+#  dpdaction=clear
+  #ike=3des-sha1,3des-sha2,aes-sha1,aes-sha1;modp1024,aes-sha2,aes-sha2;modp1024,aes256-sha2_512
+ # phase2alg=3des-sha1,3des-sha2,aes-sha1,aes-sha2,aes256-sha2_512
+ # sha2-truncbug=yes
+#conn l2tp-psk
+  #auto=add
+  #leftsubnet=$PRIVATE_IP/32
+ # leftnexthop=%defaultroute
+  #leftprotoport=17/1701
+  #rightprotoport=17/%any
+  #type=transport
+  #auth=esp
+ # also=shared
+#conn xauth-psk
+  #auto=add
+  #leftsubnet=0.0.0.0/0
+  #rightaddresspool=192.168.43.10-192.168.43.250
+  #modecfgdns1=$VPN_DNS1
+  3modecfgdns2=$VPN_DNS2
+  #leftxauthserver=yes
+  #rightxauthclient=yes
+  #leftmodecfgserver=yes
+  #rightmodecfgclient=yes
+  #modecfgpull=yes
+  #xauthby=file
+  #ike-frag=yes
+  #ikev2=never
+  #cisco-unity=yes
+ # also=shared
+#EOF
 
 # Specify IPsec PSK
-cat > /etc/ipsec.secrets <<EOF
+#cat > /etc/ipsec.secrets <<EOF
 $PUBLIC_IP  %any  : PSK "123456"
-EOF
+#EOF
 
 # Create xl2tpd config
 cat > /etc/xl2tpd/xl2tpd.conf <<EOF
@@ -220,7 +219,7 @@ iptables -t nat -I POSTROUTING -s 192.168.42.0/24 -o eth+ -j SNAT --to-source "$
 sysctl -q -p 2>/dev/null
 
 # Update file attributes
-chmod 600 /etc/ipsec.secrets /etc/ppp/chap-secrets /etc/ipsec.d/passwd
+chmod 600  /etc/ppp/chap-secrets 
 
 cat <<EOF
 ================================================
@@ -252,5 +251,5 @@ modprobe af_key
 mkdir -p /var/run/pluto /var/run/xl2tpd
 rm -f /var/run/pluto/pluto.pid /var/run/xl2tpd.pid
 
-/usr/local/sbin/ipsec start --config /etc/ipsec.conf
+#/usr/local/sbin/ipsec start --config /etc/ipsec.conf
 exec /usr/sbin/xl2tpd -D -c /etc/xl2tpd/xl2tpd.conf
