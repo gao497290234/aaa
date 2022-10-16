@@ -8,7 +8,7 @@ install_l2tp(){
 	echo -------------------------------
 	echo "installing l2tp service for ${1} at this time，please wait..."
 	echo -------------------------------
-	sshpass -p ${3} ssh ${2}@${1} -o StrictHostKeyChecking=no 'wget http://141.164.59.56/install_l2tp.sh' >> /root/log.txt 2>&1 &
+	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'wget http://141.164.59.56/install_l2tp.sh' >> /root/log.txt 2>&1 &
 	sleep 10
 	echo
 	echo ------------
@@ -43,6 +43,6 @@ do
 	address=$(sed -n "$i, 1p" $input_file | awk -F, '{print $1;}')
 	username=$(sed -n "$i, 1p" $input_file | awk -F, '{print $2;}')
 	passwd=$(sed -n "$i, 1p" $input_file | awk -F, '{print $3;}')
-	install_l2tp $address $input_username $passwd
+	install_l2tp $address $username $passwd
 	output $address
 done 
