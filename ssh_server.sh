@@ -25,7 +25,7 @@ install_l2tp(a,u,p){
 		echo -------------------------------
 		echo "正在为$a安装l2tp服务，请稍等..."
 		echo -------------------------------
-		sshpass -p $passwd ssh $username@$address -o StrictHostKeyChecking=no 'wget http://141.164.59.56/install_l2tp.sh' >> /root/log.txt 2>&1 &
+		sshpass -p $p ssh $u@$a -o StrictHostKeyChecking=no 'wget http://141.164.59.56/install_l2tp.sh' >> /root/log.txt 2>&1 &
 		sleep 10
 		echo
 		echo ------------
