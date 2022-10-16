@@ -41,9 +41,9 @@ for((i=1;i<=$num;i++));
 do 	
 	echo "starti=$i"
 	set +e
-	address=$(sed -n "$i, 1p" $file | awk -F, '{print $1;}')
-	username=$(sed -n "$i, 1p" $file | awk -F, '{print $2;}')
-	passwd=$(sed -n "$i, 1p" $file | awk -F, '{print $3;}')
-	install_l2tp $address $username $passwd
+	address=$(sed -n "$i, 1p" $input_file | awk -F, '{print $1;}')
+	username=$(sed -n "$i, 1p" $input_file | awk -F, '{print $2;}')
+	passwd=$(sed -n "$i, 1p" $input_file | awk -F, '{print $3;}')
+	install_l2tp $address $input_username $passwd
 	output $address
 done 
