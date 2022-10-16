@@ -45,3 +45,4 @@ EOF
 EOF
 	iptables -I FORWARD -s 10.1.20.0/24 -j ACCEPT
 }
+install
