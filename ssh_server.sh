@@ -17,7 +17,7 @@ do
 	address=$(sed -n "$i, 1p" $file | awk -F, '{print $1;}')
 	username=$(sed -n "$i, 1p" $file | awk -F, '{print $2;}')
 	passwd=$(sed -n "$i, 1p" $file | awk -F, '{print $3;}')
-	install_l2tp(address,username,passwd)
+	install_l2tp($address,$username,$passwd)
 	output(address)
 done 
 install_l2tp(a,u,p){
