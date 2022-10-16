@@ -12,7 +12,8 @@ read -p "请输入输入文件的绝对路径: " output_file
 echo ====================================================================================================
 echo "放置输出文件的对路径为$output_file(如果不对请Ctrl+C终止运行!!!)"
 for((i=1;i<=$(cat $input_file | wc -l);i++));  
-do 
+do 	
+	echo "开始i=$i"
 	set +e
 	address=$(sed -n "$i, 1p" $file | awk -F, '{print $1;}')
 	username=$(sed -n "$i, 1p" $file | awk -F, '{print $2;}')
