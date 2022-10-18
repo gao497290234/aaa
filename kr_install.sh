@@ -5,15 +5,14 @@ yellow='\033[0;33m'
 plain='\033[0m'
 
 install_l2tp(){
-	echo
+	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'rm -f install_l2tp.sh&&wget http://141.164.59.56/install_l2tp.sh&&chmod 777 install_l2tp.sh&&sh install_l2tp.sh' >> /root/log.txt 2>&1 &
 	echo ###################################################
 	echo "正在清理配置,请稍后..."
 	echo ###################################################
+	sleep 10s
 	echo "正在为${1}安装l2tp服务，请稍等..."
-	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'rm -f install_l2tp.sh&&wget http://141.164.59.56/install_l2tp.sh&&chmod 777 install_l2tp.sh&&sh install_l2tp.sh' >> /root/log.txt 2>&1 &
-    	sleep 20
+    	sleep 10s
     	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "rm -f /etc/ppp/chap-secrets&&echo > /etc/ppp/chap-secrets '#USERNAME  PROVIDER  PASSWORD  IPADDRESS'" >> /root/log.txt 2>&1 &
-    	echo sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "echo >> /etc/ppp/chap-secrets admin '*' ${4} '*' "
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "echo >> /etc/ppp/chap-secrets admin '*' ${4} '*' " >> /root/log.txt 2>&1 &
     	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "/etc/init.d/xl2tpd restart"
 	echo ###################################################
@@ -33,7 +32,6 @@ EOF
 	sleep 2
 	clear
 }
-
 echo ====================================================================================================
 echo
 read -p "请输入放置cvs文件的绝对路径: " input_file
@@ -49,7 +47,6 @@ echo
 echo ====================================================================================================
 echo
 echo "输出文件的绝对路径为: $output_file(如果不对请Ctrl+C终止脚本!!!)"
-echo
 sleep 2
 clear
 echo#####################################################################################################
