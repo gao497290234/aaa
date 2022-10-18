@@ -1,5 +1,3 @@
-48 lines (47 sloc)  1.72 KB
-
 #!bin/bash
 red='\033[0;31m'
 green='\033[0;32m'
@@ -48,7 +46,7 @@ do
 	address=$(sed -n "$i, 1p" $input_file | awk -F, '{print $1;}')
 	username=$(sed -n "$i, 1p" $input_file | awk -F, '{print $2;}')
 	passwd=$(sed -n "$i, 1p" $input_file | awk -F, '{print $3;}')
-    $uuid=$(cat "/proc/sys/kernel/random/uuid")
+    	uuid=$(cat "/proc/sys/kernel/random/uuid")
 	install_l2tp $address $username $passwd $uuid
 	output $address $uuid
 done 
