@@ -11,12 +11,13 @@ install_l2tp(){
 	echo ###################################################
 	echo "正在检测${1}残留配置,请稍后..."
 	echo ###################################################
-	sleep 10
+	sleep 9
 	echo "已清理全部数据,正在为${1}安装l2tp服务，请稍等..."
-    	sleep 10
+    	sleep 9
     	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "rm -f /etc/ppp/chap-secrets&&echo > /etc/ppp/chap-secrets '#USERNAME  PROVIDER  PASSWORD  IPADDRESS'" >> /root/log.txt 2>&1 &
 	sleep 2
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "echo >> /etc/ppp/chap-secrets admin '*' ${4} '*' " >> /root/log.txt 2>&1 &
+	sleep 2
     	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "/etc/init.d/xl2tpd restart"
 	echo ###################################################
 	echo "l2tp已安装"
