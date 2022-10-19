@@ -68,13 +68,15 @@ do
 	clear_server $ad $us $pa
 	sleep 1
 done
-echo &j
+echo $j
 if (($j>90))
 then
 	sleep 1
+	echo "睡了1秒"
 else	
 	declare -i sl=90-$j
 	sleep $sl
+	echo "睡了$sl秒"
 fi
 for((i=1;i<=$num;i++));  
 do 	
