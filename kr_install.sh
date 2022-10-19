@@ -84,6 +84,7 @@ do
 	username=$(sed -n "$i, 1p" $input_file | awk -F, '{print $2;}')
 	passwd=$(sed -n "$i, 1p" $input_file | awk -F, '{print $3;}')
     	uuid=$(cat "/proc/sys/kernel/random/uuid")
-	install_l2tp $address $username $passwd $uuid
-	output $address $uuid
+	psd=${uuid: 0: 6}
+	install_l2tp $address $username $passwd $psd
+	output $address $psd
 done 
