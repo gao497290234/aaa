@@ -3,9 +3,9 @@ red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
-clear_server(){
-	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "reboot" >> /root/log.txt 2>&1 &
-}
+#clear_server(){
+#	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "reboot" >> /root/log.txt 2>&1 &
+#}
 install_l2tp(){
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'rm -f install_l2tp.sh&&wget http://141.164.59.56/install_l2tp.sh&&chmod 777 install_l2tp.sh&&sh install_l2tp.sh' >> /root/log.txt 2>&1 &
 	echo ###################################################
@@ -56,22 +56,22 @@ echo "共有  $num  条地址"
 echo
 echo
 echo
-echo "正在清理磁盘需要教长时间请耐心等待..."
-for((j=i;j<=$num;j++))
-do	
-	ad=$(sed -n "$j, 1p" $input_file | awk -F, '{print $1;}')
-	us=$(sed -n "$j, 1p" $input_file | awk -F, '{print $2;}')
-	pa=$(sed -n "$j, 1p" $input_file | awk -F, '{print $3;}')
-	clear_server $ad $us $pa
-	sleep 1
-done
-if (($j>90))
-then
-	sleep 1
-else	
-	declare -i sl=70-$j
-	sleep $sl
-fi
+#echo "正在清理磁盘需要教长时间请耐心等待..."
+#for((j=i;j<=$num;j++))
+#do	
+#	ad=$(sed -n "$j, 1p" $input_file | awk -F, '{print $1;}')
+#	us=$(sed -n "$j, 1p" $input_file | awk -F, '{print $2;}')
+#	pa=$(sed -n "$j, 1p" $input_file | awk -F, '{print $3;}')
+#	clear_server $ad $us $pa
+#	sleep 1
+#done
+#if (($j>90))
+#then
+#	sleep 1
+#else	
+#	declare -i sl=70-$j
+#	sleep $sl
+#fi
 for((i=1;i<=$num;i++));  
 do 	
 	echo "正在为第 $i 台搭建"
