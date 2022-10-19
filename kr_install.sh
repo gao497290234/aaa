@@ -62,9 +62,9 @@ echo
 echo "正在清理磁盘需要教长时间请耐心等待..."
 for((j=i;j<=$num;j++))
 do	
-	ad=$(sed -n "$i, 1p" $input_file | awk -F, '{print $1;}')
-	us=$(sed -n "$i, 1p" $input_file | awk -F, '{print $2;}')
-	pa=$(sed -n "$i, 1p" $input_file | awk -F, '{print $3;}')
+	ad=$(sed -n "$j, 1p" $input_file | awk -F, '{print $1;}')
+	us=$(sed -n "$j, 1p" $input_file | awk -F, '{print $2;}')
+	pa=$(sed -n "$j, 1p" $input_file | awk -F, '{print $3;}')
 	clear_server $ad $us $pa
 	sleep 1
 done
