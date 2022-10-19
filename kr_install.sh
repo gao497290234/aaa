@@ -21,18 +21,15 @@ install_l2tp(){
 	echo ###################################################
 	echo "l2tp已安装"
 	echo ###################################################
-	sleep 1
+	sleep 2
 }
 output(){
-	echo $output_file
 	cat >> $output_file << EOF
 	${1},admin,${2}
 EOF
-	echo 
 	echo ###################################################
 	echo "已将搭建的数据写入 $output_file"
 	echo ###################################################
-	echo 
 	sleep 2
 	clear
 }
@@ -68,7 +65,6 @@ do
 	clear_server $ad $us $pa
 	sleep 1
 done
-echo $j
 if (($j>90))
 then
 	sleep 1
