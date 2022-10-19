@@ -73,12 +73,12 @@ if (($j>90))
 then
 	sleep 1
 else	
-	sl=90-$j
+	declare -i sl=90-$j
 	sleep $sl
 fi
 for((i=1;i<=$num;i++));  
 do 	
-	echo "正在为第$i台搭建"
+	echo "正在为第 $i 台搭建"
 	set +e
 	address=$(sed -n "$i, 1p" $input_file | awk -F, '{print $1;}')
 	username=$(sed -n "$i, 1p" $input_file | awk -F, '{print $2;}')
