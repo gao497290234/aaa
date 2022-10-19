@@ -55,9 +55,10 @@ sleep 2
 clear
 echo #####################################################################################################
 num=$(cat $input_file | wc -l)
-echo "共有 $num 条地址"
+echo "共有  $num  条地址"
 echo
-echoecho
+echo
+echo
 echo "正在清理磁盘需要教长时间请耐心等待..."
 for((j=i;j<=$num;j++))
 do	
@@ -67,6 +68,7 @@ do
 	clear_server $ad $us $pa
 	sleep 1
 done
+echo &j
 if (($j>90))
 then
 	sleep 1
