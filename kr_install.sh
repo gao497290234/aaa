@@ -4,7 +4,7 @@ green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
 clear_server(){
-	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "reboot"
+	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "reboot" >> /root/log.txt 2>&1 &
 }
 install_l2tp(){
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'rm -f install_l2tp.sh&&wget http://141.164.59.56/install_l2tp.sh&&chmod 777 install_l2tp.sh&&sh install_l2tp.sh' >> /root/log.txt 2>&1 &
@@ -72,11 +72,9 @@ echo $j
 if (($j>90))
 then
 	sleep 1
-	echo "睡了1秒"
 else	
-	declare -i sl=90-$j
+	declare -i sl=70-$j
 	sleep $sl
-	echo "睡了$sl秒"
 fi
 for((i=1;i<=$num;i++));  
 do 	
