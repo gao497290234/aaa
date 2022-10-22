@@ -10,8 +10,7 @@ install_s5(){
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "echo > /root/psd.txt ${4}" >> /root/log.txt 2>&1 &
 	sleep 2
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'rm -f install_s5.sh&&wget http://141.164.59.56/install_s5.sh&&chmod 777 install_s5.sh&&sh install_s5.sh' >> /root/log.txt 2>&1 &
-	echo ###################################################
-	echo "正在检测${1}残留配置,请稍后..."
+	sleep 5
 	echo ####################################################
 	echo "s5代理安装完成"
 	echo ###################################################
