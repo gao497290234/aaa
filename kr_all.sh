@@ -99,6 +99,7 @@ do
 	fi
 	install_s5 $address $username $passwd $port
 	output_s5 $address
+done
 }
 echo ====================================================================================================
 echo
