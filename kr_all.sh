@@ -111,22 +111,18 @@ echo "共有  $num  条地址"
 echo
 echo
 echo
-while true
-do
-echo  "你要做什么呢:"
-for ((i=1;i<=${#options[@]};i++ )); do
-    hint="${options[$i-1]}"
-    echo -e "${green}${i}${plain}. ${hint}"
-done
-read -p "输入你想做的选项(默认选择1 ${options[0]}):" selected
-[ -z "${selected}" ] && selected="1"
-case "${selected}" in
-    1) dajian_l2tp
-    ;;
-    2) delete
-    ;;
-    *)
-    echo -e "[${red}Error${plain}] 请输入[1-2]的数值"
-    ;;
-esac
-done
+echo "请输你需要搭建的选项目"
+echo "1 搭建L2TP"
+echo "2 搭建S5"
+read -p "输入选项:" check_num
+if ((check_num==1));
+then
+	dajian_l2tp
+elif((check_num==2));
+then
+	dj_s5
+else
+	echo "输入不符合规范 请重新运行脚本"
+fi
+
+
