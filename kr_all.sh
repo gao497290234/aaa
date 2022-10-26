@@ -68,7 +68,7 @@ function install_s5(){
 }
 function output_s5(){
 	cat >> $output_file << EOF
-	${1},${2},admin,123
+	${1},10001,admin,123
 EOF
 	echo ###################################################
 	echo "已将搭建的数据写入 $output_file"
@@ -98,7 +98,7 @@ do
 		port=$c
 	fi
 	install_s5 $address $username $passwd $port
-	output_s5 $address $port
+	output_s5 $address
 }
 echo ====================================================================================================
 echo
