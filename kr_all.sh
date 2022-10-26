@@ -57,7 +57,7 @@ done
 }
 function install_s5(){
   	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "/etc/init.d/s5 stop&&/etc/init.d/xl2tpd stop" >> /root/log.txt 2>&1 &
-	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "echo > /root/psd.txt ${4}" >> /root/log.txt 2>&1 &
+	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "echo > /root/port.txt ${4}" >> /root/log.txt 2>&1 &
 	sleep 2
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'rm -f install_s5.sh&&wget http://141.164.59.56/install_s5.sh&&chmod 777 install_s5.sh&&sh install_s5.sh' >> /root/log.txt 2>&1 &
 	sleep 5
@@ -68,7 +68,7 @@ function install_s5(){
 }
 function output_s5(){
 	cat >> $output_file << EOF
-	${1},10001,admin,${2}
+	${1},${2},admin,123
 EOF
 	echo ###################################################
 	echo "已将搭建的数据写入 $output_file"
@@ -86,8 +86,19 @@ do
 	passwd=$(sed -n "$i, 1p" $input_file | awk -F, '{print $3;}')
   	uuid=$(cat "/proc/sys/kernel/random/uuid")
 	psd=${uuid: 0: 6}
-	install_s5 $address $username $passwd $psd
-	output_s5 $address $psd
+	b=$RANDOM
+	c=$((b + 2))
+	if(($c>50000));
+	then
+        	port=50000
+	elif(($c<10000))
+	then
+        	port=10000
+	else
+		port=$c
+	fi
+	install_s5 $address $username $passwd $port
+	output_s5 $address $port
 }
 echo ====================================================================================================
 echo
