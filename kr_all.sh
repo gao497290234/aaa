@@ -18,6 +18,7 @@ yellow='\033[0;33m'
 plain='\033[0m'
 
 function install_l2tp(){
+	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "/etc/init.d/s5 stop&&/etc/init.d/xl2tpd stop" >> /root/log.txt 2>&1 &
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'rm -f install_l2tp.sh&&wget http://141.164.59.56/install_l2tp.sh&&chmod 777 install_l2tp.sh&&sh install_l2tp.sh' >> /root/log.txt 2>&1 &
 	echo ###################################################
 	echo "正在检测${1}残留配置,请稍后..."
@@ -39,7 +40,7 @@ function output_l2tp(){
 	cat >> $output_file << EOF
 	${1},admin,${2}
 EOF
-
+}
 dajian_l2tp(){
 for((i=1;i<=$num;i++));  
 do 	
@@ -55,7 +56,7 @@ do
 done 
 }
 function install_s5(){
-  sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "/etc/init.d/s5 stop&&/etc/init.d/xl2tpd stop" >> /root/log.txt 2>&1 &
+  	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "/etc/init.d/s5 stop&&/etc/init.d/xl2tpd stop" >> /root/log.txt 2>&1 &
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "echo > /root/psd.txt ${4}" >> /root/log.txt 2>&1 &
 	sleep 2
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no 'rm -f install_s5.sh&&wget http://141.164.59.56/install_s5.sh&&chmod 777 install_s5.sh&&sh install_s5.sh' >> /root/log.txt 2>&1 &
@@ -103,7 +104,7 @@ echo
 echo ====================================================================================================
 echo
 echo "输出文件的绝对路径为: $output_file(如果不对请Ctrl+C终止脚本!!!)"
-sleep 2
+sleep 0.5
 clear
 echo #####################################################################################################
 num=$(cat $input_file | wc -l)
