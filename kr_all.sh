@@ -40,6 +40,8 @@ done
 function install_s5(){
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "/etc/init.d/s5 stop" >> /root/log.txt 2>&1 &
 	sleep 1
+	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "rm -f /tmp/runoob.log" >> /root/log.txt 2>&1 &
+	sleep 1
   	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "/etc/init.d/xl2tpd stop" >> /root/log.txt 2>&1 &
 	sshpass -p "${3}" ssh ${2}@${1} -o StrictHostKeyChecking=no "echo > /root/port.txt ${4}" >> /root/log.txt 2>&1 &
 	sleep 2
