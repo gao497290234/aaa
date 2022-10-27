@@ -27,7 +27,7 @@ echo "共有  $num  条地址"
 echo
 for((i=1;i<=$num;i++));  
 do 	
-	echo "正在清理 $i 台搭建s5"
+	echo "正在清理第 $i 台 "
 	set +e
 	address=$(sed -n "$i, 1p" $input_file | awk -F, '{print $1;}')
 	username=$(sed -n "$i, 1p" $input_file | awk -F, '{print $2;}')
